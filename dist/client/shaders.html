@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Shaders</title>
+        <link rel="stylesheet" href="./styles/styles.css">
+    </head>
+    <body>
+        <script type="module" src="bundle.js"></script>
+        <div class="shaders"></div>
+
+        <!-- Inline shaders -->
+        <script id="vertexShader" type="x-shader/x-vertex">
+            uniform float time;
+            uniform vec2 resolution;
+            void main()	{
+                gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+            }
+        </script>
+        <script id="fragmentShader" type="x-shader/x-fragment">
+            uniform float time;
+            uniform vec2 resolution;
+            void main()	{
+                float x = mod(time + gl_FragCoord.x, 20.) < 10. ? 1. : 0.;
+                float y = mod(time + gl_FragCoord.y, 20.) < 10. ? 1. : 0.;
+                gl_FragColor = vec4(vec3(min(x, y)), 1.);
+            }
+        </script>
+        <!-- End Inline Shaders -->
+
+    </body>
+</html>
