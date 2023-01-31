@@ -4,7 +4,9 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 // @ts-ignore
 // import { vertexShader, fragmentShader } from '../shaders/phong.glsl';
 // @ts-ignore
-import { vertexShader, fragmentShader } from '../shaders/texture.glsl';
+// import { vertexShader, fragmentShader } from '../shaders/texture.glsl';
+// @ts-ignore
+// import { vertexShader, fragmentShader } from '../shaders/simple.glsl';
 
 export const shadersExample = () => {
     // Create a scene
@@ -59,7 +61,7 @@ export const shadersExample = () => {
             time: { value: 0 },
             mouse: { value: new THREE.Vector2() },
             lightPos: { value: new THREE.Vector3(-2, -2, -2) },
-            cameraPos: { value: camera.position },
+            // cameraPos: { value: camera.position },
             image: {
                 value: gridTexture
             },
@@ -70,12 +72,12 @@ export const shadersExample = () => {
         },
         
         // @ts-ignore
-        // vertexShader: document.getElementById( 'vertexShader' ).textContent as string,
+        vertexShader: document.getElementById( 'vertexShader' ).textContent as string,
         // @ts-ignore
-        // fragmentShader: document.getElementById( 'fragmentShader' ).textContent as string,
+        fragmentShader: document.getElementById( 'fragmentShader' ).textContent as string,
 
-        vertexShader,
-        fragmentShader
+        // vertexShader,
+        // fragmentShader
 
     } );
     //End Shader Material
@@ -107,10 +109,7 @@ export const shadersExample = () => {
         requestAnimationFrame(update)
 
         material.uniforms.time.value += 1;
-
-        material.uniforms.cameraPos.value = camera.position;
-
-        
+        // material.uniforms.cameraPos.value = camera.position;
 
         render()
     }

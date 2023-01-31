@@ -2,9 +2,12 @@ export const vertexShader = /* GLSL vert shader */`
 uniform float time;
 uniform vec2 mouse;
 varying vec3 v_normal;
+varying vec3 v_cameraPos;
 void main()	{
 
     v_normal = normal;    
+    
+    v_cameraPos = cameraPosition;
 
     vec4 temp = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
 
@@ -23,8 +26,8 @@ void main()	{
 export const fragmentShader = /* GLSL frag shader */`
 precision lowp float;
 uniform vec3 lightPos;
-uniform vec3 cameraPos;
 varying vec3 v_normal;
+varying vec3 v_cameraPos;
 
 void main() {
 
@@ -48,7 +51,7 @@ void main() {
 
   // SPECULAR light
 
-  vec3 viewSource = normalize(cameraPos);
+  vec3 viewSource = normalize(v_cameraPos);
 
   vec3 reflectSource = normalize(reflect(-lightPos, normal));
 
@@ -64,7 +67,7 @@ void main() {
 
   // LIGHTING = ambient + diffuse + specular
 
-  vec3 lighting = vec3(0, 0, 0); // no lighting
+  vec3 lighting = vec3(0., 0., 0.); // no lighting
 
   // lighting = ambient;
 

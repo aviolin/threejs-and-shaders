@@ -72,12 +72,28 @@ export const liveExample = () => {
     // const geometry = new THREE.DodecahedronGeometry()
     // const geometry = new THREE.TorusGeometry()
     // const geometry = new THREE.TorusKnotGeometry()
+    // const geometry = new THREE.BufferGeometry();
+    // create a simple square shape. We duplicate the top left and bottom right
+    // vertices because each vertex needs to appear once per triangle.
+    // const vertices = new Float32Array( [
+    //     -1.0, -1.0,  1.0,
+    //      1.0, -1.0,  1.0,
+    //      1.0,  1.0,  1.0,
+    
+    //      1.0,  1.0,  1.0,
+    //     -1.0,  1.0,  1.0,
+    //     -1.0, -1.0,  1.0
+    // ] );
+    // itemSize = 3 because there are 3 values (components) per vertex
+    // geometry.setAttribute( 'position', new THREE.BufferAttribute( vertices, 3 ) );
     
     // Create a material
     const material = new THREE.MeshBasicMaterial({
         color: 0x00ffff,
         wireframe: true,
     })
+    // material.side = THREE.DoubleSide;
+
     // const material = new THREE.MeshLambertMaterial({
     //     color: 0xffffff,
     //     wireframe: false,
@@ -104,8 +120,8 @@ export const liveExample = () => {
     // material.envMap = envTexture
     
     // Create a mesh (primitive shape)
-    const cube = new THREE.Mesh(geometry, material)
-    scene.add(cube)
+    const mesh = new THREE.Mesh(geometry, material)
+    scene.add(mesh)
     
     // Add a light
     // const light = new THREE.PointLight()
@@ -133,8 +149,8 @@ export const liveExample = () => {
     function update() {
         requestAnimationFrame(update)
         
-        cube.rotation.x += 0.01
-        cube.rotation.y += 0.01
+        mesh.rotation.x += 0.01
+        mesh.rotation.y += 0.01
         
         // pointerLockControls.update()
     
